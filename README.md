@@ -14,7 +14,7 @@ Basically `scalax` allows to use Scala xml literals to build React DOM.
 
 `scalax` uses macro annototations, so it requires macro paradise compiler plugin.
 
-```
+```scala
 object HelloMessage extends TypedReactSpec {
 
   case class State()
@@ -38,7 +38,7 @@ React.renderComponent(
 
 A component can maintain internal state
 
-```
+```scala
 object Timer extends TypedReactSpec with TypedEventListeners {
 
   case class Props()
@@ -73,7 +73,7 @@ object Timer extends TypedReactSpec with TypedEventListeners {
 
 ## Typed listeners and closures
 
-```
+```scala
 object Say extends TypedReactSpec with TypedEventListeners {
 
   case class Props()
