@@ -110,4 +110,7 @@ object Say extends TypedReactSpec with TypedEventListeners {
 
 # Copyright
 
-Copyright © 2014 Xored Software Inc
+Copyright © 2014 Xored Software, Inc.
+
+Licensed under the Apache License, Version 2.0.
+
