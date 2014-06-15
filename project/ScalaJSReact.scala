@@ -19,7 +19,7 @@ object ScalaJSReact extends Build {
     .settings(commonSettings: _*)
     .settings(
       libraryDependencies ++= Seq(
-        "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.5",
+        "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6",
         "org.scala-lang.modules" %% "scala-xml" % "1.0.2",
         "org.scala-lang" % "scala-reflect" % "2.11.1",
         compilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)
@@ -31,7 +31,7 @@ object ScalaJSReact extends Build {
     .settings(commonSettings: _*)
     .settings(
       libraryDependencies ++= Seq(
-        "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.5",
+        "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6",
         "org.scala-lang.modules" %% "scala-xml" % "1.0.2",
         compilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)
       )
@@ -39,10 +39,6 @@ object ScalaJSReact extends Build {
     .dependsOn(react)
 
   val root = Project("root", file(".")).aggregate(react, examples)
-
-  resolvers += Resolver.url("scala-js-releases",
-    url("http://dl.bintray.com/content/scala-js/scala-js-releases"))(
-      Resolver.ivyStylePatterns)
 
   resolvers += Resolver.sonatypeRepo("releases")
 
