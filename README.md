@@ -10,9 +10,10 @@ Scala-js-react provides nice statically typed interface to [Facebook's React](ht
 ## `scalax` annotation
 
 While [Facebook React](http://facebook.github.io/react/) uses JSX, `scala-js-react` offers `scalax` support. 
-Basically `scalax` allows to use Scala xml literals to build React DOM.
+Basically `scalax` allows to use Scala XML literals to build React DOM.
 
-`scalax` uses macro annototations, so it requires macro paradise compiler plugin.
+React DOM allows to put objects into attribute values, while `scala.xml.UnprefixedAttribute` constructor takes `Seq[Node]` or `String`.
+So we have to transform methods before it typechecks. That is why `scalax` `scalax` uses macro annotations and requires macro paradise compiler plugin.
 
 ```scala
 object HelloMessage extends TypedReactSpec {
@@ -36,7 +37,7 @@ React.renderComponent(
 
 ## Internal State
 
-A component can maintain internal state
+A component can maintain internal state.
 
 ```scala
 object Timer extends TypedReactSpec with TypedEventListeners {
