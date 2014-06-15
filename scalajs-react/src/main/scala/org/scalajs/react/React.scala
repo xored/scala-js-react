@@ -29,6 +29,10 @@ object React {
     ReactJS.renderComponent(component, container)
   }
 
+  def renderComponentToString[S, P](component: ReactComponent[S, P]) = {
+    ReactJS.renderComponentToString(component)
+  }
+
   def createClass(spec: ReactSpec): ReactComponentClass[spec.type#This#State, spec.type#This#Props] = {
     import js.ThisFunction._
 

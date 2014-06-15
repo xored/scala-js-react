@@ -29,5 +29,7 @@ object ReactJS extends js.Object {
 
   def renderComponent[State, Props](component: ReactComponent[State, Props], container: dom.HTMLElement): ReactComponent[State, Props] = ???
 
+  def renderComponentToString[State, Props](component: ReactComponent[State, Props]): String = ???
+
   def DOM: js.Dynamic = ???
 }
