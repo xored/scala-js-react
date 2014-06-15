@@ -1,7 +1,9 @@
 import sbt._
 import sbt.Keys._
 
+import scala.scalajs.sbtplugin.env.nodejs.NodeJSEnv
 import scala.scalajs.sbtplugin.ScalaJSPlugin._
+import scala.scalajs.sbtplugin.ScalaJSPlugin.ScalaJSKeys._
 
 object ScalaJSReact extends Build {
 
@@ -11,6 +13,8 @@ object ScalaJSReact extends Build {
   val scalaXml = "org.scala-lang.modules" %% "scala-xml" % "1.0.2"
   val scalaReflect = "org.scala-lang" % "scala-reflect" % SCALA_VERSION
   val macroParadisePlugin = compilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)
+  val jasmine = "org.scala-lang.modules.scalajs" %% "scalajs-jasmine-test-framework" % scalaJSVersion % "test"
+  val reactjs = "org.webjars" % "react" % "0.10.0" / "react.js"
 
   val commonSettings = Seq(
     version := "0.1-SNAPSHOT",
@@ -31,6 +35,23 @@ object ScalaJSReact extends Build {
       )
     )
 
+  lazy val reactTests = Project("scalajs-react-tests", file("scalajs-react-tests"))
+    .settings(scalaJSSettings: _*)
+    .settings(commonSettings: _*)
+    .settings(
+      libraryDependencies ++= Seq(
+        scalajsDom,
+        scalaXml,
+        macroParadisePlugin,
+        jasmine
+      ),
+      jsEnv in Test := new NodeJSEnv,
+      jsDependencies ++= Seq(
+        reactjs % "test"
+      )
+    )
+    .dependsOn(react)
+
   lazy val examples = Project("scalajs-react-examples", file("scalajs-react-examples"))
     .settings(scalaJSSettings: _*)
     .settings(commonSettings: _*)
@@ -43,7 +64,7 @@ object ScalaJSReact extends Build {
     )
     .dependsOn(react)
 
-  val root = Project("root", file(".")).aggregate(react, examples)
+  val root = Project("root", file(".")).aggregate(react, reactTests, examples)
 
   resolvers += Resolver.sonatypeRepo("releases")
 
