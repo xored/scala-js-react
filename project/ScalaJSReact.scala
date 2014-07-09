@@ -17,7 +17,7 @@ object ScalaJSReact extends Build {
   val reactjs = "org.webjars" % "react" % "0.10.0" / "react.js"
 
   val commonSettings = Seq(
-    version := "0.1-SNAPSHOT",
+    version := "0.1",
     organization := "org.scala-lang.modules.scalajs",
     scalaVersion := SCALA_VERSION,
     homepage := Some(url("http://github.com/xored/scala-js-react/"))
