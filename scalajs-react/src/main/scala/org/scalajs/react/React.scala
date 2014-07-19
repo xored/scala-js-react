@@ -25,12 +25,12 @@ object React {
 
   val DOM = ReactDOM
 
-  def renderComponent[S, P](component: ReactComponent[S, P], container: HTMLElement): ReactComponent[S, P] = {
-    ReactJS.renderComponent(component, container)
+  def renderComponent[C <: ReactDOM](dom: C, container: HTMLElement): C = {
+    ReactJS.renderComponent(dom, container)
   }
 
-  def renderComponentToString[S, P](component: ReactComponent[S, P]) = {
-    ReactJS.renderComponentToString(component)
+  def renderComponentToString[C <: ReactDOM](dom: C): String = {
+    ReactJS.renderComponentToString(dom)
   }
 
   def createClass(spec: ReactSpec): ReactComponentClass[spec.type#This#State, spec.type#This#Props] = {
