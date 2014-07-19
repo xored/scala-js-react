@@ -18,7 +18,7 @@ object ScalaJSReact extends Build {
 
   val commonSettings = Seq(
     version := "0.1.1-SNAPSHOT",
-    organization := "org.scala-lang.modules.scalajs",
+    organization := "com.xored.scalajs",
     scalaVersion := SCALA_VERSION,
     licenses := Seq("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0.html")),
     homepage := Some(url("http://github.com/xored/scala-js-react/"))
