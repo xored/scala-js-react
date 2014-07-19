@@ -29,8 +29,12 @@ object React {
     ReactJS.renderComponent(dom, container)
   }
 
-  def renderComponentToString[C <: ReactDOM](dom: C): String = {
+  def renderComponentToString(dom: ReactDOM): String = {
     ReactJS.renderComponentToString(dom)
+  }
+
+  def renderComponentToStaticMarkup(dom: ReactDOM): String = {
+    ReactJS.renderComponentToStaticMarkup(dom)
   }
 
   def createClass(spec: ReactSpec): ReactComponentClass[spec.type#This#State, spec.type#This#Props] = {

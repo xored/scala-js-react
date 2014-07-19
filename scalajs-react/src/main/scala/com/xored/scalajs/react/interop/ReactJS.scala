@@ -30,7 +30,9 @@ object ReactJS extends js.Object {
 
   def renderComponent[C <: ReactDOM](component: C, container: dom.HTMLElement): C = ???
 
-  def renderComponentToString[C <: ReactDOM](dom: C): String = ???
+  def renderComponentToString(dom: ReactDOM): String = ???
+
+  def renderComponentToStaticMarkup(dom: ReactDOM): String = ???
 
   def DOM: js.Dynamic = ???
 }

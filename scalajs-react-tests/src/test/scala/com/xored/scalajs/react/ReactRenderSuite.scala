@@ -2,58 +2,52 @@ package com.xored.scalajs.react
 
 import scala.scalajs.test.JasmineTest
 import scala.scalajs.js
-import com.xored.scalajs.react.interop.ReactComponent
+import com.xored.scalajs.react.comp._
 
 object ReactRenderSuite extends JasmineTest {
   js.eval("React = module.exports")
 
   // TODO use React.addons.TestUtils and jsdom
 
-  def renderToString(component: ReactComponent[_, _]) =
-    React.renderComponentToString(component)
-      .replaceAll(" data-reactid=\"[^\"]*\"", "")
-      .replaceAll(" data-react-checksum=\"[^\"]*\"", "")
+  def renderToString(dom: ReactDOM) = React.renderComponentToStaticMarkup(dom)
 
-  describe("Hello") {
-    object Hello extends TypedReactSpec {
-      case class Props()
-      case class State()
-
-      def getInitialState(self: This) = State()
-
-      @scalax
-      def render(self: This) = {
-        <h1>Hello World!</h1>
-      }
-    }
-
-    it("render") {
-      val component = Hello(Hello.Props())
-      val dom = renderToString(component)
+  describe("React#renderComponent") {
+    it("render <HelloWorld />") {
+      val reactDom = HelloWorld(HelloWorld.Props())
+      val dom = renderToString(reactDom)
 
       expect(dom).toEqual("<h1>Hello World!</h1>")
     }
-  }
 
-  describe("Hello with props") {
-    object Hello extends TypedReactSpec {
-      case class Props(name: String)
-      case class State()
+    it("render <HelloName />") {
+      val reactDom = Hello(Hello.Props("Jack"))
+      val dom = renderToString(reactDom)
 
-      def getInitialState(self: This) = State()
-
-      @scalax
-      def render(self: This) = {
-        <h1>Hello {self.props.name}!</h1>
-      }
+      expect(dom).toEqual("<h1>Hello Jack!</h1>")
     }
 
-    it("render") {
-      val component = Hello(Hello.Props("Jack"))
-      val dom = renderToString(component)
+    it("render <h1>Hello World</h1>") {
+      @scalax val reactDom = <h1>Hello World!</h1>
+      val dom = renderToString(reactDom)
 
-      expect(dom).toEqual("<h1><span>Hello </span><span>Jack</span><span>!</span></h1>")
+      expect(dom).toEqual("<h1>Hello World!</h1>")
+    }
+
+    it("render <div><Hello World /></div>") {
+      @scalax val reactDom = <div>{HelloWorld(HelloWorld.Props())}</div>
+      val dom = renderToString(reactDom)
+
+      expect(dom).toEqual("<div><h1>Hello World!</h1></div>")
+    }
+
+    it("render <Panel><HelloWorld /><button>Submit</button></Panel>") {
+      @scalax val reactDom = Panel(Panel.Props(
+            HelloWorld(HelloWorld.Props()),
+            <button>Submit</button>
+          ))
+      val dom = renderToString(reactDom)
+
+      expect(dom).toEqual("<div class=\"panel\"><h1>Hello World!</h1><button>Submit</button></div>")
     }
   }
-
 }
