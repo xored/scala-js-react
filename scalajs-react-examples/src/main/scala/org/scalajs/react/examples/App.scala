@@ -7,6 +7,7 @@ import org.scalajs.react.examples.todomvc.TodoApp
 import org.scalajs.react.examples.timer.Timer
 import org.scalajs.react.examples.hello.HelloMessage
 import org.scalajs.react.examples.say.Say
+import org.scalajs.react.examples.children.Children
 
 @JSExport
 object App {
@@ -41,6 +42,11 @@ object App {
       Say(Say.Props()),
       parent
     )
+  }
+
+  @JSExport
+  def children(parent: HTMLElement) = {
+    Children.main(parent)
   }
 
 }
