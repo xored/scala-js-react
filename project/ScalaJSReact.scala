@@ -47,7 +47,8 @@ object ScalaJSReact extends Build {
         macroParadisePlugin,
         jasmine
       ),
-      jsEnv in Test := new NodeJSEnv
+      jsEnv in Test := new NodeJSEnv,
+      publishArtifact := false
     )
     .dependsOn(react)
 
@@ -60,11 +61,14 @@ object ScalaJSReact extends Build {
         scalaXml,
         macroParadisePlugin
       ),
-      skip in ScalaJSKeys.packageJSDependencies := false // creates scalajs-react-examples-jsdeps.js
+      skip in ScalaJSKeys.packageJSDependencies := false, // creates scalajs-react-examples-jsdeps.js
+      publishArtifact := false
     )
     .dependsOn(react)
 
-  val root = Project("root", file(".")).aggregate(react, reactTests, examples)
+  val root = Project("root", file("."))
+    .settings(publishArtifact := false)
+    .aggregate(react, reactTests, examples)
 
   resolvers += Resolver.sonatypeRepo("releases")
 
