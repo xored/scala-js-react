@@ -23,17 +23,46 @@ object TypedThisLike {
   val STATE_KEY = "__scalajs_react_state"
   val PROPS_KEY = "__scalajs_react_props"
   val COMPONENT_ID_KEY = "__scalajs_react_component_id"
+
+  def reactPropsBridge[T] = new JSBridge[T] {
+    def apply(props: T) = {
+      js.Dictionary(
+        (PROPS_KEY, props.asInstanceOf[js.Any]),
+        (COMPONENT_ID_KEY, UUID())
+      )
+    }
+
+    def apply(value: js.Any) = {
+      val dynamic = value.asInstanceOf[js.Dynamic]
+      dynamic.selectDynamic(PROPS_KEY).asInstanceOf[T]
+    }
+  }
+
+  def reactStateBridge[T] = new JSBridge[T] {
+    def apply(state: T): js.Any = {
+      js.Dictionary(
+        (STATE_KEY, state.asInstanceOf[js.Any])
+      )
+    }
+
+    def apply(value: js.Any) = {
+      val dynamic = value.asInstanceOf[js.Dynamic]
+      dynamic.selectDynamic(STATE_KEY).asInstanceOf[T]
+    }
+  }
 }
 
-class TypedThisLike(val dynamic: js.Dynamic) extends ThisLike {
+class TypedThisLike(self: js.Any) extends ThisLike {
 
   import TypedThisLike._
+
+  private val dynamic = self.asInstanceOf[js.Dynamic]
 
   def props = dynamic.props.selectDynamic(PROPS_KEY).asInstanceOf[Props]
 
   def state = dynamic.state.selectDynamic(STATE_KEY).asInstanceOf[State]
 
-  def componentId = dynamic.state.selectDynamic(COMPONENT_ID_KEY).toString
+  def componentId = dynamic.props.selectDynamic(COMPONENT_ID_KEY).toString
 
   def refs(key: String) = dynamic.refs.selectDynamic(key).asInstanceOf[ReactDOMRef]
 
@@ -53,42 +82,21 @@ trait TypedReactSpec extends ReactSpec {
   type State
   type Props
 
-  val jsBridge: JsBridgeLike[This] = new TypedJsBridge()
+  implicit final val reactStateBridge = TypedThisLike.reactStateBridge[State]
+  implicit final val reactPropsBridge = TypedThisLike.reactPropsBridge[Props]
 
-  type This = TypedThisLike {
+  implicit final val thisReader = new JSBridgeFrom[This] {
+    def apply(value: js.Any) = {
+      val dynamic = value.asInstanceOf[js.Dynamic]
+      new TypedThisLike(dynamic) {
+        type State = spec.type#State
+        type Props = spec.type#Props
+      }
+    }
+  }
+
+  final type This = TypedThisLike {
     type State = spec.type#State
     type Props = spec.type#Props
-  }
-
-}
-
-class TypedJsBridge[T <: TypedThisLike] extends JsBridgeLike[T] {
-  import TypedThisLike._
-
-  def dynamicAsState(dynamic: js.Dynamic) = {
-    dynamic.selectDynamic(STATE_KEY).asInstanceOf[T#State]
-  }
-
-  def dynamicAsProps(dynamic: js.Dynamic) = {
-    dynamic.selectDynamic(PROPS_KEY).asInstanceOf[T#Props]
-  }
-
-  def dynamicAsThis(dynamic: js.Dynamic): T = {
-    // TODO this doesn't work if T isn't TypedThisLike
-    new TypedThisLike(dynamic).asInstanceOf[T]
-  }
-
-  def mkReactState(state: T#State) = {
-    js.Dictionary(
-      (STATE_KEY, state.asInstanceOf[js.Any]),
-      (COMPONENT_ID_KEY, UUID())
-    )
-  }
-
-  def mkReactProps(props: T#Props) = {
-    js.Dictionary(
-      (PROPS_KEY, props.asInstanceOf[js.Any]),
-      (COMPONENT_ID_KEY, UUID())
-    )
   }
 }

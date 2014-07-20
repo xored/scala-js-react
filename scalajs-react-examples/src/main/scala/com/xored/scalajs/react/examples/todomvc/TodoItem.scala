@@ -33,7 +33,7 @@ object TodoItem extends TypedReactSpec with TypedEventListeners {
 
     val handleEdit = element.onEvent(e => {
       props.onEdit(() => {
-        val node = self.refs(editField).getDOMNode[HTMLInputElement]()
+        val node = self.refs(editField).getDOMNode().asInstanceOf[HTMLInputElement]
         node.focus()
         node.setSelectionRange(node.value.length, node.value.length)
       })

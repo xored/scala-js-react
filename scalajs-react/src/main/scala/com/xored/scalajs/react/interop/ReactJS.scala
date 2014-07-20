@@ -26,7 +26,7 @@ import com.xored.scalajs.react.ReactDOM
  */
 @JSName("React")
 object ReactJS extends js.Object {
-  def createClass[State, Props](spec: js.Dictionary[js.Any]): ReactComponentClass[State, Props] = ???
+  def createClass[State, Props, T](spec: js.Dictionary[T]): ReactComponentClass[State, Props] = ???
 
   def renderComponent[C <: ReactDOM](component: C, container: dom.HTMLElement): C = ???
 

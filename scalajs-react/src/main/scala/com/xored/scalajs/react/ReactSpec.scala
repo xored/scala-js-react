@@ -20,6 +20,7 @@ import scala.scalajs.js
 
 import scala.language.experimental.macros
 import com.xored.scalajs.react.interop._
+import com.xored.scalajs.react.export._
 
 trait ReactSpec {
   type This <: ThisLike
@@ -27,34 +28,47 @@ trait ReactSpec {
 
   private[this] lazy val reactClass = React.createClass(this)
 
-  val jsBridge: JsBridgeLike[This]
+  def exports(): List[Export] = List(
+    export1("render", render),
+    export1("componentDidMount", componentDidMount),
+    export1("componentWillMount", componentWillMount),
+    export1("componentWillUnmount", componentWillUnmount),
+    export2("componentWillReceiveProps", componentWillReceiveProps),
+    export3("componentDidUpdate", componentDidUpdate),
+    export3("shouldComponentUpdate", shouldComponentUpdate),
+    export1("getInitialState", getInitialState)
+  )
 
-  def apply[T](props: This#Props, ref: js.Any = js.Any.fromUnit()): ComponentType = {
-    val dict = jsBridge.mkReactProps(props)
+  implicit def thisReader: JSBridgeFrom[This]
 
-    if (!key(props).isInstanceOf[js.Undefined]) dict.update(ThisLike.REACT_KEY, key(props))
-    if (!ref.isInstanceOf[js.Undefined]) dict.update(ThisLike.REACT_REF, ref)
+  implicit def reactPropsBridge: JSBridge[This#Props]
+
+  implicit def reactStateBridge: JSBridge[This#State]
+
+  def apply[T](props: This#Props, ref: js.Any = js.undefined)(implicit e: JSBridgeTo[This#Props]): ComponentType = {
+    val dict = e(props).asInstanceOf[js.Dictionary[js.Any]] // anything js.Any could be cast to js.Dictionary
+
+    if (key(props) != js.undefined) dict.update(ThisLike.REACT_KEY, key(props))
+    if (ref != js.undefined) dict.update(ThisLike.REACT_REF, ref)
 
     reactClass(dict)
   }
 
-  def key(props: This#Props): js.Any = {
-    js.Any.fromUnit()
-  }
+  def key(props: This#Props): js.Any = js.undefined
 
   def render(self: This): ReactDOM
 
-  def componentDidMount(self: This) {}
+  def componentDidMount(self: This): Unit = {}
 
-  def componentDidUpdate(self: This, prevProps: This#Props, prevState: This#State) {}
+  def componentDidUpdate(self: This, prevProps: This#Props, prevState: This#State): Unit = {}
 
-  def componentWillMount(self: This) {}
+  def componentWillMount(self: This): Unit = {}
 
-  def componentWillUnmount(self: This) {}
+  def componentWillUnmount(self: This): Unit = {}
 
-  def componentWillReceiveProps(self: This, nextProps: This#Props) {}
+  def componentWillReceiveProps(self: This, nextProps: This#Props): Unit = {}
 
-  def shouldComponentUpdate(self: This, nextProps: This#Props, nextState: This#State) = {
+  def shouldComponentUpdate(self: This, nextProps: This#Props, nextState: This#State): Boolean = {
     self.props != nextProps || self.state != nextState
   }
 
