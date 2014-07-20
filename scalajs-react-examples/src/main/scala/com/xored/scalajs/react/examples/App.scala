@@ -8,6 +8,7 @@ import com.xored.scalajs.react.examples.timer.Timer
 import com.xored.scalajs.react.examples.hello.HelloMessage
 import com.xored.scalajs.react.examples.say.Say
 import com.xored.scalajs.react.examples.children.Children
+import com.xored.scalajs.react.examples.export.Export
 
 @JSExport
 object App {
@@ -40,6 +41,14 @@ object App {
   def say(parent: HTMLElement) = {
     React.renderComponent(
       Say(Say.Props()),
+      parent
+    )
+  }
+
+  @JSExport
+  def export(parent: HTMLElement) = {
+    React.renderComponent(
+      Export(Export.Props()),
       parent
     )
   }
