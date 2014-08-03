@@ -9,13 +9,13 @@ Scala-js-react provides nice statically typed interface to [Facebook's React](ht
 ```scala
 import sbt._
 
-val scalaVersion = "2.11.1"
+val scalaVersion = "2.11.2"
 
 resolvers += Resolver.sonatypeRepo("releases")
 
 libraryDependencies ++= Seq(
   "com.xored.scalajs" %%% "scalajs-react" % "0.2",
-  compilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)
+  compilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
 )
 ```
 

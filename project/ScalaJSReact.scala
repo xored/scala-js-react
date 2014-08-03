@@ -7,12 +7,12 @@ import scala.scalajs.sbtplugin.ScalaJSPlugin.ScalaJSKeys._
 
 object ScalaJSReact extends Build {
 
-  val SCALA_VERSION = "2.11.1"
+  val SCALA_VERSION = "2.11.2"
 
   val scalajsDom = "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6"
   val scalaXml = "org.scala-lang.modules" %% "scala-xml" % "1.0.2"
   val scalaReflect = "org.scala-lang" % "scala-reflect" % SCALA_VERSION
-  val macroParadisePlugin = compilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)
+  val macroParadisePlugin = compilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
   val jasmine = "org.scala-lang.modules.scalajs" %% "scalajs-jasmine-test-framework" % scalaJSVersion % "test"
   val reactjs = "org.webjars" % "react" % "0.10.0" / "react.js"
 
@@ -32,7 +32,7 @@ object ScalaJSReact extends Build {
         "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6",
         "org.scala-lang.modules" %% "scala-xml" % "1.0.2",
         "org.scala-lang" % "scala-reflect" % "2.11.1",
-        compilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)
+        macroParadisePlugin
       )
     )
 
