@@ -14,7 +14,7 @@ object ScalaJSReact extends Build {
   val scalaReflect = "org.scala-lang" % "scala-reflect" % SCALA_VERSION
   val macroParadisePlugin = compilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
   val jasmine = "org.scala-lang.modules.scalajs" %% "scalajs-jasmine-test-framework" % scalaJSVersion % "test"
-  val reactjs = "org.webjars" % "react" % "0.10.0" / "react.js"
+  val reactjs = "org.webjars" % "react" % "0.11.0" / "react.js" commonJSName "React"
 
   val commonSettings = Seq(
     version := "0.2.1-SNAPSHOT",
@@ -33,7 +33,8 @@ object ScalaJSReact extends Build {
         "org.scala-lang.modules" %% "scala-xml" % "1.0.2",
         "org.scala-lang" % "scala-reflect" % "2.11.1",
         macroParadisePlugin
-      )
+      ),
+      jsDependencies += reactjs
     )
 
   lazy val reactTests = Project("scalajs-react-tests", file("scalajs-react-tests"))
@@ -46,10 +47,7 @@ object ScalaJSReact extends Build {
         macroParadisePlugin,
         jasmine
       ),
-      jsEnv in Test := new NodeJSEnv,
-      jsDependencies ++= Seq(
-        reactjs % "test"
-      )
+      jsEnv in Test := new NodeJSEnv
     )
     .dependsOn(react)
 
@@ -61,7 +59,8 @@ object ScalaJSReact extends Build {
         scalajsDom,
         scalaXml,
         macroParadisePlugin
-      )
+      ),
+      skip in ScalaJSKeys.packageJSDependencies := false // creates scalajs-react-examples-jsdeps.js
     )
     .dependsOn(react)
 

@@ -5,8 +5,6 @@ import scala.scalajs.js
 import com.xored.scalajs.react.comp._
 
 object ReactRenderSuite extends JasmineTest {
-  js.eval("React = module.exports")
-
   // TODO use React.addons.TestUtils and jsdom
 
   def renderToString(dom: ReactDOM) = React.renderComponentToStaticMarkup(dom)
