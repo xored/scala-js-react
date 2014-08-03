@@ -73,7 +73,5 @@ trait ReactSpec {
   }
 
   def getInitialState(self: This): This#State
-
 }
-
 

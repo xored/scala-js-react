@@ -52,7 +52,6 @@ object ScalaxImpl {
     val checked = c.typecheck(c.untypecheck(newTree))
     c.Expr(checked)
   }
-
 }
 
 private class ScalaxHelper[C <: Context](val c: C) {
@@ -142,5 +141,4 @@ private class ScalaxHelper[C <: Context](val c: C) {
       c.error(x.pos, s"Can't make ReactDOM by ${showRaw(x)}")
       x
   }
-
 }

@@ -26,5 +26,4 @@ package object util {
       dict
     }
   }
-
 }

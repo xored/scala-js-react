@@ -70,5 +70,4 @@ object ReactMetaData {
     md.update(key, value)
     md
   }
-
 }

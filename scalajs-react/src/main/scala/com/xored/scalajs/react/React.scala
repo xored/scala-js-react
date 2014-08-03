@@ -42,5 +42,4 @@ object React {
 
     ReactJS.createClass(reactSpec)
   }
-
 }

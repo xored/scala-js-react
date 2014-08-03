@@ -56,7 +56,6 @@ trait TypedEventListeners {
   object form {
     def onSubmit(e: TypedEvent[HTMLElement] => Unit) = js.Any.fromFunction1(e)
   }
-
 }
 
 object TypedEventListeners extends TypedEventListeners

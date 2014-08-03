@@ -24,4 +24,3 @@ trait ReactComponentClass[State, Props] extends js.Function1[js.Object, ReactCom
 trait ReactComponent[State, Props] extends ReactDOM {
   def setState(state: State): Unit = ???
 }
-

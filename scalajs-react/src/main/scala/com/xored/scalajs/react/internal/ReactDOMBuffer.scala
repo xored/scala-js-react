@@ -41,5 +41,4 @@ class ReactDOMBuffer extends scala.collection.mutable.ArrayBuffer[ReactDOM] {
 
     this
   }
-
 }
