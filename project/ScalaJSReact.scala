@@ -17,7 +17,7 @@ object ScalaJSReact extends Build {
   val reactjs = "org.webjars" % "react" % "0.11.0" / "react.js" commonJSName "React"
 
   val commonSettings = Seq(
-    version := "0.3.0",
+    version := "0.3.1-SNAPSHOT",
     organization := "com.xored.scalajs",
     scalaVersion := SCALA_VERSION,
     licenses := Seq("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0.html")),
