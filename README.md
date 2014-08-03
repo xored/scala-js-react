@@ -14,14 +14,14 @@ val scalaVersion = "2.11.2"
 resolvers += Resolver.sonatypeRepo("releases")
 
 libraryDependencies ++= Seq(
-  "com.xored.scalajs" %%% "scalajs-react" % "0.2",
+  "com.xored.scalajs" %%% "scalajs-react" % "0.3",
   compilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
 )
 ```
 
 `project/plugins.sbt`
 ```scala
-addSbtPlugin("org.scala-lang.modules.scalajs" % "scalajs-sbt-plugin" % "0.5.2")
+addSbtPlugin("org.scala-lang.modules.scalajs" % "scalajs-sbt-plugin" % "0.5.3")
 ```
 
 # Features
