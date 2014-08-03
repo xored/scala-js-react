@@ -7,9 +7,7 @@ Scala-js-react provides nice statically typed interface to [Facebook's React](ht
 
 `build.sbt`
 ```scala
-import sbt._
-
-val scalaVersion = "2.11.2"
+scalaVersion := "2.11.2"
 
 resolvers += Resolver.sonatypeRepo("releases")
 
