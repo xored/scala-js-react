@@ -85,12 +85,15 @@ object TodoApp extends TypedReactSpec with TypedEventListeners {
   def render(self: This) = {
     val activeTodoCount = self.state.todos.count(!_.completed)
 
+    // Use onKeyUp temporarily because onKeyPress does not work on Firefox with current version of react
+    //   See https://github.com/facebook/react/pull/1956
+
     <section id="todoapp">
       <header id="header">
         <h1>todos</h1>
         <input id="new-todo"
                onChange={self.onChange}
-               onKeyPress={self.onKeyPress}
+               onKeyUp={self.onKeyPress}
                value={self.state.text}
                placeholder="What needs to be done?"
                autofocus={true}></input>
