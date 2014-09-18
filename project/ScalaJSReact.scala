@@ -29,9 +29,9 @@ object ScalaJSReact extends Build {
     .settings(commonSettings: _*)
     .settings(
       libraryDependencies ++= Seq(
-        "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6",
-        "org.scala-lang.modules" %% "scala-xml" % "1.0.2",
-        "org.scala-lang" % "scala-reflect" % "2.11.1",
+        scalajsDom,
+        scalaXml,
+        scalaReflect,
         macroParadisePlugin
       ),
       jsDependencies += reactjs
