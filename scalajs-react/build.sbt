@@ -7,7 +7,7 @@ pomExtra := {
     <connection>scm:git:github.com/xored/scala-js-react.git</connection>
     <developerConnection>scm:git:git@github.com:scala-js-react.git</developerConnection>
     <url>https://github.com/xored/scala-js-react</url>
-    <tag>{s"release-$version"}</tag>
+    <tag>{"release-0.3.1"}</tag>
   </scm>
   <developers>
     <developer>

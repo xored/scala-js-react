@@ -12,7 +12,7 @@ scalaVersion := "2.11.2"
 resolvers += Resolver.sonatypeRepo("releases")
 
 libraryDependencies ++= Seq(
-  "com.xored.scalajs" %%% "scalajs-react" % "0.3.0",
+  "com.xored.scalajs" %%% "scalajs-react" % "0.3.1",
   compilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
 )
 ```
