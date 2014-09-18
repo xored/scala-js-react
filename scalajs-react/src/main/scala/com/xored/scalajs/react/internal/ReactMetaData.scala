@@ -31,11 +31,6 @@ object ReactMetaData {
     }
   }
 
-  def apply(key: String, value: Map[String, String], md: js.Dictionary[js.Any]): js.Dictionary[js.Any] = {
-    md.update(key, js.Dictionary.apply(value.toSeq: _*))
-    md
-  }
-
   def apply(key: String, value: () => _, md: js.Dictionary[js.Any]): js.Dictionary[js.Any] = {
     md.update(key, js.Any.fromFunction0(value))
     md
@@ -67,6 +62,21 @@ object ReactMetaData {
   }
 
   def apply(key: String, value: js.Number, md: js.Dictionary[js.Any]): js.Dictionary[js.Any] = {
+    md.update(key, value)
+    md
+  }
+
+  def apply[T](key: String, value: Map[String, T], md: js.Dictionary[js.Any]): js.Dictionary[js.Any] = {
+    md.update(key, js.Dictionary.apply(value.toSeq: _*))
+    md
+  }
+
+  def apply[T](key: String, value: js.Dictionary[T], md: js.Dictionary[js.Any]): js.Dictionary[js.Any] = {
+    md.update(key, value)
+    md
+  }
+
+  def apply(key: String, value: js.Dynamic, md: js.Dictionary[js.Any]): js.Dictionary[js.Any] = {
     md.update(key, value)
     md
   }
