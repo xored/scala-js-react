@@ -74,6 +74,10 @@ class TypedThisLike(self: js.Any) extends ThisLike {
     val dict = js.Dictionary((STATE_KEY, newState))
     dynamic.setState(dict, js.Any.fromFunction0(callback))
   }
+
+  def forceUpdate(): Unit = {
+    dynamic.forceUpdate()
+  }
 }
 
 trait TypedReactSpec extends ReactSpec {

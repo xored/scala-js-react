@@ -26,6 +26,8 @@ trait ThisLike {
 
   def setState(newState: State): Unit
   def setState(newState: State, callback: () => Unit): Unit
+
+  def forceUpdate(): Unit
 }
 
 object ThisLike {
