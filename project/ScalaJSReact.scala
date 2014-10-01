@@ -21,7 +21,10 @@ object ScalaJSReact extends Build {
     organization := "com.xored.scalajs",
     scalaVersion := SCALA_VERSION,
     licenses := Seq("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0.html")),
-    homepage := Some(url("http://github.com/xored/scala-js-react/"))
+    homepage := Some(url("http://github.com/xored/scala-js-react/")),
+    scalacOptions := Seq("-unchecked", "-deprecation",
+      "-encoding", "utf8", "-feature", "-Yinline-warnings",
+      "-language:implicitConversions", "-language:higherKinds")
   )
 
   lazy val react = Project("scalajs-react", file("scalajs-react"))
