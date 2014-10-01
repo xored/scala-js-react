@@ -27,5 +27,5 @@ object scalax {
 }
 
 class scalax(verbose: Boolean = false) extends StaticAnnotation {
-  def macroTransform(annottees: Any*) = macro ScalaxImpl.macroTransform
+  def macroTransform(annottees: Any*): ReactDOM = macro ScalaxImpl.macroTransform
 }
