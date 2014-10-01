@@ -16,9 +16,15 @@
 
 package com.xored.scalajs.react
 
+import com.xored.scalajs.react.event.TypedSyntheticEvent
+import org.scalajs.dom
+
 import scala.scalajs.js
 
 package object util {
+
+  @deprecated("use TypedSyntheticEvent", "0.3.2")
+  type TypedEvent[+T <: dom.EventTarget] = TypedSyntheticEvent[T]
 
   implicit class RichDictionary[T](val dict: js.Dictionary[T]) {
     def += (kv: (String, T)): js.Dictionary[T] = {
