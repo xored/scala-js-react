@@ -16,46 +16,89 @@
 
 package com.xored.scalajs.react.util
 
+import com.xored.scalajs.react.event._
+
 import scala.scalajs.js
 import org.scalajs.dom._
 
-class TypedEvent[+T <: EventTarget] extends Event {
-  override val target: T = ???
-}
-
 trait TypedEventListeners {
 
-  // TODO extend this list
+  trait ElementEventListeners[T <: EventTarget] {
+    def onEvent(e: TypedSyntheticEvent[T] => Unit): js.Function1[TypedSyntheticEvent[T], Unit] = js.Any.fromFunction1(e)
 
-  object element {
-    def onClick(e: TypedEvent[HTMLElement] => Unit) = js.Any.fromFunction1(e)
+    def onCopy(e: TypedClipboardEvent[T] => Unit): js.Function1[TypedClipboardEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onCut(e: TypedClipboardEvent[T] => Unit): js.Function1[TypedClipboardEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onPaste(e: TypedClipboardEvent[T] => Unit): js.Function1[TypedClipboardEvent[T], Unit] = js.Any.fromFunction1(e)
 
-    def onScroll(e: TypedEvent[HTMLElement] => Unit) = js.Any.fromFunction1(e)
+    def onKeyDown(e: TypedKeyboardEvent[T] => Unit): js.Function1[TypedKeyboardEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onKeyPress(e: TypedKeyboardEvent[T] => Unit): js.Function1[TypedKeyboardEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onKeyUp(e: TypedKeyboardEvent[T] => Unit): js.Function1[TypedKeyboardEvent[T], Unit] = js.Any.fromFunction1(e)
 
-    def onEvent(e: TypedEvent[HTMLElement] => Unit) = js.Any.fromFunction1(e)
+    def onFocus(e: TypedFocusEvent[T] => Unit): js.Function1[TypedFocusEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onBlur(e: TypedFocusEvent[T] => Unit): js.Function1[TypedFocusEvent[T], Unit] = js.Any.fromFunction1(e)
 
-    def onBlur(e: TypedEvent[HTMLElement] => Unit) = js.Any.fromFunction1(e)
+    def onClick(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onDoubleClick(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onDrag(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onDragEnd(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onDragEnter(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onDragExit(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onDragLeave(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onDragOver(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onDragStart(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onDrop(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onMouseDown(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onMouseEnter(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onMouseLeave(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onMouseMove(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onMouseOut(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onMouseOver(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onMouseUp(e: TypedMouseEvent[T] => Unit): js.Function1[TypedMouseEvent[T], Unit] = js.Any.fromFunction1(e)
 
-    def onKeyPress(e: KeyboardEvent with TypedEvent[HTMLElement] => Unit) = js.Any.fromFunction1(e)
+    def onTouchCancel(e: TypedTouchEvent[T] => Unit): js.Function1[TypedTouchEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onTouchEnd(e: TypedTouchEvent[T] => Unit): js.Function1[TypedTouchEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onTouchMove(e: TypedTouchEvent[T] => Unit): js.Function1[TypedTouchEvent[T], Unit] = js.Any.fromFunction1(e)
+    def onTouchStart(e: TypedTouchEvent[T] => Unit): js.Function1[TypedTouchEvent[T], Unit] = js.Any.fromFunction1(e)
+
+    def onScroll(e: TypedUIEvent[T] => Unit): js.Function1[TypedUIEvent[T], Unit] = js.Any.fromFunction1(e)
+
+    def onWheel(e: TypedWheelEvent[T] => Unit): js.Function1[TypedWheelEvent[T], Unit] = js.Any.fromFunction1(e)
   }
 
-  object input {
-    def onChange(e: TypedEvent[HTMLInputElement] => Unit) = js.Any.fromFunction1(e)
+  object element extends ElementEventListeners[HTMLElement]
 
-    def onBlur(e: TypedEvent[HTMLInputElement] => Unit) = js.Any.fromFunction1(e)
-
-    def onInput(e: TypedEvent[HTMLInputElement] => Unit) = js.Any.fromFunction1(e)
-
-    def onKeyPress(e: KeyboardEvent with TypedEvent[HTMLInputElement] => Unit) = js.Any.fromFunction1(e)
+  object input extends ElementEventListeners[HTMLInputElement] {
+    def onChange(e: TypedInputFormEvent => Unit): js.Function1[TypedInputFormEvent, Unit] = js.Any.fromFunction1(e)
+    def onInput(e: TypedInputFormEvent => Unit): js.Function1[TypedInputFormEvent, Unit] = js.Any.fromFunction1(e)
+    def onSubmit(e: TypedInputFormEvent => Unit): js.Function1[TypedInputFormEvent, Unit] = js.Any.fromFunction1(e)
   }
 
-  object button {
-    def onClick(e: TypedEvent[HTMLInputElement] => Unit) = js.Any.fromFunction1(e)
+  object textarea extends ElementEventListeners[HTMLInputElement] {
+    def onChange(e: TypedInputFormEvent => Unit): js.Function1[TypedInputFormEvent, Unit] = js.Any.fromFunction1(e)
+    def onInput(e: TypedInputFormEvent => Unit): js.Function1[TypedInputFormEvent, Unit] = js.Any.fromFunction1(e)
+    def onSubmit(e: TypedInputFormEvent => Unit): js.Function1[TypedInputFormEvent, Unit] = js.Any.fromFunction1(e)
+  }
+
+  object checkbox extends ElementEventListeners[HTMLInputElement] {
+    def onChange(e: TypedCheckboxFormEvent => Unit): js.Function1[TypedCheckboxFormEvent, Unit] = js.Any.fromFunction1(e)
+    def onInput(e: TypedCheckboxFormEvent => Unit): js.Function1[TypedCheckboxFormEvent, Unit] = js.Any.fromFunction1(e)
+    def onSubmit(e: TypedCheckboxFormEvent => Unit): js.Function1[TypedCheckboxFormEvent, Unit] = js.Any.fromFunction1(e)
+  }
+
+  object option extends ElementEventListeners[HTMLInputElement] {
+    def onChange(e: TypedOptionFormEvent => Unit): js.Function1[TypedOptionFormEvent, Unit] = js.Any.fromFunction1(e)
+    def onInput(e: TypedOptionFormEvent => Unit): js.Function1[TypedOptionFormEvent, Unit] = js.Any.fromFunction1(e)
+    def onSubmit(e: TypedOptionFormEvent => Unit): js.Function1[TypedOptionFormEvent, Unit] = js.Any.fromFunction1(e)
   }
 
   object form {
-    def onSubmit(e: TypedEvent[HTMLElement] => Unit) = js.Any.fromFunction1(e)
+    def onChange(e: TypedFormEvent[HTMLFormElement] => Unit): js.Function1[TypedFormEvent[HTMLFormElement], Unit] = js.Any.fromFunction1(e)
+    def onInput(e: TypedFormEvent[HTMLFormElement] => Unit): js.Function1[TypedFormEvent[HTMLFormElement], Unit] = js.Any.fromFunction1(e)
+    def onSubmit(e: TypedFormEvent[HTMLFormElement] => Unit): js.Function1[TypedFormEvent[HTMLFormElement], Unit] = js.Any.fromFunction1(e)
   }
+
+  object button extends ElementEventListeners[HTMLInputElement]
+
 }
 
 object TypedEventListeners extends TypedEventListeners
