@@ -66,6 +66,8 @@ class TypedThisLike(self: js.Any) extends ThisLike {
 
   def refs(key: String) = dynamic.refs.selectDynamic(key).asInstanceOf[ReactDOMRef]
 
+  def isMounted: Boolean = dynamic.isMounted().asInstanceOf[Boolean]
+
   def setState(newState: State) {
     setState(newState, () => {})
   }

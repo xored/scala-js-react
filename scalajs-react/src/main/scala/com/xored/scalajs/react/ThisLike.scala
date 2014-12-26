@@ -23,6 +23,7 @@ trait ThisLike {
   def props: Props
   def state: State
   def refs(key: String): ReactDOMRef
+  def isMounted: Boolean
 
   def setState(newState: State): Unit
   def setState(newState: State, callback: () => Unit): Unit
