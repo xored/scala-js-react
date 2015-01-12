@@ -9,7 +9,7 @@ object ScalaJSReact extends Build {
 
   val SCALA_VERSION = "2.11.2"
 
-  val scalajsDom = "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % "0.6"
+  val scalajsDomVersion = "0.6"
   val scalaXml = "org.scala-lang.modules" %% "scala-xml" % "1.0.2"
   val scalaReflect = "org.scala-lang" % "scala-reflect" % SCALA_VERSION
   val macroParadisePlugin = compilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
@@ -32,7 +32,7 @@ object ScalaJSReact extends Build {
     .settings(commonSettings: _*)
     .settings(
       libraryDependencies ++= Seq(
-        scalajsDom,
+        "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % scalajsDomVersion,
         scalaXml,
         scalaReflect,
         macroParadisePlugin
@@ -45,7 +45,7 @@ object ScalaJSReact extends Build {
     .settings(commonSettings: _*)
     .settings(
       libraryDependencies ++= Seq(
-        scalajsDom,
+        "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % scalajsDomVersion,
         scalaXml,
         macroParadisePlugin,
         jasmine
@@ -60,8 +60,6 @@ object ScalaJSReact extends Build {
     .settings(commonSettings: _*)
     .settings(
       libraryDependencies ++= Seq(
-        scalajsDom,
-        scalaXml,
         macroParadisePlugin
       ),
       skip in ScalaJSKeys.packageJSDependencies := false, // creates scalajs-react-examples-jsdeps.js

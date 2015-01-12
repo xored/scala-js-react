@@ -10,7 +10,7 @@ import com.xored.scalajs.react.examples.say.Say
 import com.xored.scalajs.react.examples.children.Children
 import com.xored.scalajs.react.examples.export.Export
 
-@JSExport
+@JSExport("App")
 object App {
 
   @JSExport
