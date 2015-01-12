@@ -19,8 +19,10 @@ package com.xored.scalajs.react.event
 import org.scalajs.dom
 import org.scalajs.dom.HTMLInputElement
 
+import scala.scalajs.js
+
 trait TypedSyntheticEvent[+T <: dom.EventTarget] extends SyntheticEvent {
-  override val target: T
+  override val target: T = js.native
 }
 
 trait TypedClipboardEvent[T <: dom.EventTarget] extends ClipboardEvent with TypedSyntheticEvent[T]
@@ -33,13 +35,13 @@ trait TypedUIEvent[T <: dom.EventTarget] extends UIEvent with TypedSyntheticEven
 trait TypedWheelEvent[T <: dom.EventTarget] extends WheelEvent with TypedSyntheticEvent[T]
 
 trait TypedInputFormEvent extends TypedFormEvent[HTMLInputElement] {
-  val value: String
+  val value: String = js.native
 }
 
 trait TypedCheckboxFormEvent extends TypedFormEvent[HTMLInputElement] {
-  val checked: Boolean
+  val checked: Boolean = js.native
 }
 
 trait TypedOptionFormEvent extends TypedFormEvent[HTMLInputElement] {
-  val selected: Boolean
+  val selected: Boolean = js.native
 }

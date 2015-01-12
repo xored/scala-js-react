@@ -23,7 +23,7 @@ import com.xored.scalajs.react.interop.ReactJS
 trait ReactDOM extends HTMLElement
 
 trait ReactDOMRef extends js.Object {
-  def getDOMNode(): ReactDOM = ??? // we need brackets for interop!
+  def getDOMNode(): ReactDOM = js.native // we need brackets for interop!
 }
 
 object ReactDOM {

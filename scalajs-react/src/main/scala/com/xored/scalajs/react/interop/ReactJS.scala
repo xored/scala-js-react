@@ -26,13 +26,13 @@ import com.xored.scalajs.react.ReactDOM
  */
 @JSName("React")
 object ReactJS extends js.Object {
-  def createClass[State, Props, T](spec: js.Dictionary[T]): ReactComponentClass[State, Props] = ???
+  def createClass[State, Props, T](spec: js.Dictionary[T]): ReactComponentClass[State, Props] = js.native
 
-  def renderComponent[C <: ReactDOM](component: C, container: dom.HTMLElement): C = ???
+  def renderComponent[C <: ReactDOM](component: C, container: dom.HTMLElement): C = js.native
 
-  def renderComponentToString(dom: ReactDOM): String = ???
+  def renderComponentToString(dom: ReactDOM): String = js.native
 
-  def renderComponentToStaticMarkup(dom: ReactDOM): String = ???
+  def renderComponentToStaticMarkup(dom: ReactDOM): String = js.native
 
-  def DOM: js.Dynamic = ???
+  def DOM: js.Dynamic = js.native
 }

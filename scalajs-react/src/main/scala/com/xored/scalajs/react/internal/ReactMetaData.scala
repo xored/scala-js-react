@@ -51,17 +51,17 @@ object ReactMetaData {
     md
   }
 
-  def apply(key: String, value: js.String, md: js.Dictionary[js.Any]): js.Dictionary[js.Any] = {
+  def apply(key: String, value: String, md: js.Dictionary[js.Any]): js.Dictionary[js.Any] = {
     md.update(key, value)
     md
   }
 
-  def apply(key: String, value: js.Boolean, md: js.Dictionary[js.Any]): js.Dictionary[js.Any] = {
+  def apply(key: String, value: Boolean, md: js.Dictionary[js.Any]): js.Dictionary[js.Any] = {
     md.update(key, value)
     md
   }
 
-  def apply(key: String, value: js.Number, md: js.Dictionary[js.Any]): js.Dictionary[js.Any] = {
+  def apply(key: String, value: Double, md: js.Dictionary[js.Any]): js.Dictionary[js.Any] = {
     md.update(key, value)
     md
   }

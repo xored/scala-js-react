@@ -19,8 +19,8 @@ package com.xored.scalajs.react.interop
 import scala.scalajs.js
 import com.xored.scalajs.react.ReactDOM
 
-trait ReactComponentClass[State, Props] extends js.Function1[js.Object, ReactComponent[State, Props]]
+trait ReactComponentClass[State, Props] extends js.Function1[js.Dictionary[Any], ReactComponent[State, Props]]
 
 trait ReactComponent[State, Props] extends ReactDOM {
-  def setState(state: State): Unit = ???
+  def setState(state: State): Unit = js.native
 }

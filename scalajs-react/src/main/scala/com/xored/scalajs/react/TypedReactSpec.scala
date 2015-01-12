@@ -17,7 +17,6 @@
 package com.xored.scalajs.react
 
 import scala.scalajs.js
-import com.xored.scalajs.react.util.UUID
 
 object TypedThisLike {
   val STATE_KEY = "__scalajs_react_state"
@@ -28,7 +27,7 @@ object TypedThisLike {
     def apply(props: T) = {
       js.Dictionary(
         (PROPS_KEY, props.asInstanceOf[js.Any]),
-        (COMPONENT_ID_KEY, UUID())
+        (COMPONENT_ID_KEY, java.util.UUID.randomUUID().toString)
       )
     }
 

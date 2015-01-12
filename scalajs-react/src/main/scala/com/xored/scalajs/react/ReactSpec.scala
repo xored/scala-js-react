@@ -45,16 +45,19 @@ trait ReactSpec {
 
   implicit def reactStateBridge: JSBridge[This#State]
 
-  def apply[T](props: This#Props, ref: js.Any = js.undefined)(implicit e: JSBridgeTo[This#Props]): ComponentType = {
-    val dict = e(props).asInstanceOf[js.Dictionary[js.Any]] // anything js.Any could be cast to js.Dictionary
+  def apply[T](props: This#Props, ref: Any = ())(implicit e: JSBridgeTo[This#Props]): ComponentType = {
+    val dict = e(props).asInstanceOf[js.Dictionary[Any]] // anything js.Any could be cast to js.Dictionary
 
-    if (key(props) != js.undefined) dict.update(ThisLike.REACT_KEY, key(props))
-    if (ref != js.undefined) dict.update(ThisLike.REACT_REF, ref)
+    js.UndefOr.any2undefOrA(key(props)).foreach(
+      value => dict.update(ThisLike.REACT_KEY, value))
+
+    js.UndefOr.any2undefOrA(ref).foreach(
+      value => dict.update(ThisLike.REACT_REF, value))
 
     reactClass(dict)
   }
 
-  def key(props: This#Props): js.Any = js.undefined
+  def key(props: This#Props): Any = ()
 
   def render(self: This): ReactDOM
 

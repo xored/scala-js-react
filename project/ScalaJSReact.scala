@@ -1,19 +1,19 @@
 import sbt._
 import sbt.Keys._
 
-import scala.scalajs.sbtplugin.env.nodejs.NodeJSEnv
-import scala.scalajs.sbtplugin.ScalaJSPlugin._
-import scala.scalajs.sbtplugin.ScalaJSPlugin.ScalaJSKeys._
+import org.scalajs.sbtplugin.ScalaJSPlugin
+import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 
 object ScalaJSReact extends Build {
 
-  val SCALA_VERSION = "2.11.2"
+  val SCALA_VERSION = "2.11.5"
 
-  val scalajsDomVersion = "0.6"
+  val uTestVersion = "0.2.5-RC1"
+  val scalajsDomVersion = "0.7.0"
   val scalaXml = "org.scala-lang.modules" %% "scala-xml" % "1.0.2"
   val scalaReflect = "org.scala-lang" % "scala-reflect" % SCALA_VERSION
   val macroParadisePlugin = compilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full)
-  val jasmine = "org.scala-lang.modules.scalajs" %% "scalajs-jasmine-test-framework" % scalaJSVersion % "test"
+  val jasmine = "org.scala-js" %% "scalajs-jasmine-test-framework" % scalaJSVersion % "test"
   val reactjs = "org.webjars" % "react" % "0.11.0" / "react.js" commonJSName "React"
 
   val commonSettings = Seq(
@@ -28,42 +28,44 @@ object ScalaJSReact extends Build {
   )
 
   lazy val react = Project("scalajs-react", file("scalajs-react"))
-    .settings(scalaJSSettings: _*)
+    .enablePlugins(ScalaJSPlugin)
     .settings(commonSettings: _*)
     .settings(
       libraryDependencies ++= Seq(
-        "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % scalajsDomVersion,
+        "org.scala-js" %%% "scalajs-dom" % scalajsDomVersion,
         scalaXml,
         scalaReflect,
         macroParadisePlugin
       ),
-      jsDependencies += reactjs
+      jsDependencies += reactjs,
+      test in Test := {}
     )
 
   lazy val reactTests = Project("scalajs-react-tests", file("scalajs-react-tests"))
-    .settings(scalaJSSettings: _*)
+    .enablePlugins(ScalaJSPlugin)
     .settings(commonSettings: _*)
     .settings(
       libraryDependencies ++= Seq(
-        "org.scala-lang.modules.scalajs" %%% "scalajs-dom" % scalajsDomVersion,
+        "org.scala-js" %%% "scalajs-dom" % scalajsDomVersion,
         scalaXml,
         macroParadisePlugin,
-        jasmine
+        "com.lihaoyi" %%% "utest" % uTestVersion % "test"
       ),
-      jsEnv in Test := new NodeJSEnv,
+      scalaJSStage := FastOptStage,
+      testFrameworks += new TestFramework("utest.runner.Framework"),
       publishArtifact := false
     )
     .dependsOn(react)
 
   lazy val examples = Project("scalajs-react-examples", file("scalajs-react-examples"))
-    .settings(scalaJSSettings: _*)
+    .enablePlugins(ScalaJSPlugin)
     .settings(commonSettings: _*)
     .settings(
       libraryDependencies ++= Seq(
         macroParadisePlugin
       ),
-      skip in ScalaJSKeys.packageJSDependencies := false, // creates scalajs-react-examples-jsdeps.js
-      publishArtifact := false
+      skip in packageJSDependencies := false, // creates scalajs-react-examples-jsdeps.js
+      test in Test := {}
     )
     .dependsOn(react)
 

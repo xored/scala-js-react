@@ -21,91 +21,91 @@ import org.scalajs.dom
 import scala.scalajs.js
 
 trait SyntheticEvent extends js.Object {
-  val bubbles: Boolean
-  val cancelable: Boolean
+  val bubbles: Boolean = js.native
+  val cancelable: Boolean = js.native
 
-  val currentTarget: dom.EventTarget
-  val target: dom.EventTarget
-  val nativeEvent: dom.Event
+  val currentTarget: dom.EventTarget = js.native
+  val target: dom.EventTarget = js.native
+  val nativeEvent: dom.Event = js.native
 
-  def preventDefault(): Unit
-  def stopPropagation(): Unit
+  def preventDefault(): Unit = js.native
+  def stopPropagation(): Unit = js.native
 
-  val defaultPrevented: Boolean
-  val eventPhase: Int
-  val isTrusted: Boolean
-  val timeStamp: js.Date
-  val `type`: String
+  val defaultPrevented: Boolean = js.native
+  val eventPhase: Int = js.native
+  val isTrusted: Boolean = js.native
+  val timeStamp: js.Date = js.native
+  val `type`: String = js.native
 }
 
 trait ClipboardEvent extends SyntheticEvent {
-  val clipboardData: dom.DataTransfer
+  val clipboardData: dom.DataTransfer = js.native
 }
 
 trait KeyboardEvent extends SyntheticEvent {
-  val altKey: Boolean
-  val ctrlKey: Boolean
-  val metaKey: Boolean
-  val shiftKey: Boolean
+  val altKey: Boolean = js.native
+  val ctrlKey: Boolean = js.native
+  val metaKey: Boolean = js.native
+  val shiftKey: Boolean = js.native
 
-  val charCode: Int
-  val key: String
-  val keyCode: Int
-  val locale: String
-  val location: Int
-  val repeat: Boolean
-  val which: Int
+  val charCode: Int = js.native
+  val key: String = js.native
+  val keyCode: Int = js.native
+  val locale: String = js.native
+  val location: Int = js.native
+  val repeat: Boolean = js.native
+  val which: Int = js.native
 
-  def getModifierState(keyArg: String): Boolean
+  def getModifierState(keyArg: String): Boolean = js.native
 }
 
 trait FocusEvent extends SyntheticEvent {
-  val relatedTarget: dom.EventTarget
+  val relatedTarget: dom.EventTarget = js.native
 }
 
 trait FormEvent extends SyntheticEvent
 
 trait MouseEvent extends SyntheticEvent {
-  val altKey: Boolean
-  val ctrlKey: Boolean
-  val metaKey: Boolean
-  val shiftKey: Boolean
+  val altKey: Boolean = js.native
+  val ctrlKey: Boolean = js.native
+  val metaKey: Boolean = js.native
+  val shiftKey: Boolean = js.native
 
-  val button: Int
-  val buttons: Int
+  val button: Int = js.native
+  val buttons: Int = js.native
 
-  val clientX: Int
-  val clientY: Int
-  val pageX: Int
-  val pageY: Int
-  val screenX: Int
-  val screenY: Int
+  val clientX: Int = js.native
+  val clientY: Int = js.native
+  val pageX: Int = js.native
+  val pageY: Int = js.native
+  val screenX: Int = js.native
+  val screenY: Int = js.native
 
-  val relatedTarget: dom.EventTarget
+  val relatedTarget: dom.EventTarget = js.native
 }
 
 trait TouchEvent extends SyntheticEvent {
-  val altKey: Boolean
-  val ctrlKey: Boolean
-  val metaKey: Boolean
-  val shiftKey: Boolean
+  val altKey: Boolean = js.native
+  val ctrlKey: Boolean = js.native
+  val metaKey: Boolean = js.native
+  val shiftKey: Boolean = js.native
 
-  val changedTouches: dom.TouchList
-  val targetTouches: dom.TouchList
-  val touches: dom.TouchList
+  val changedTouches: dom.TouchList = js.native
+  val targetTouches: dom.TouchList = js.native
+  val touches: dom.TouchList = js.native
 
-  def getModifierState(keyArg: String): Boolean
+  def getModifierState(keyArg: String): Boolean = js.native
 }
 
 trait UIEvent extends SyntheticEvent {
-  val detail: Int
-  val view: dom.Window
+  val detail: Int = js.native
+  val view: dom.Window = js.native
 }
 
 trait WheelEvent extends SyntheticEvent {
-  val deltaMode: Int
-  val deltaX: Double
-  val deltaY: Double
-  val deltaZ: Double
+  val deltaMode: Int = js.native
+  val deltaX: Double = js.native
+  val deltaY: Double = js.native
+  val deltaZ: Double = js.native
 }
 

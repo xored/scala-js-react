@@ -31,7 +31,7 @@ object TodoApp extends TypedReactSpec with TypedEventListeners {
       if (e.keyCode == KeyCode.enter) {
         e.preventDefault()
 
-        val todo = Todo(uuid = UUID(), title = state.text, completed = false)
+        val todo = Todo(uuid = java.util.UUID.randomUUID().toString, title = state.text, completed = false)
 
         setState(state.copy(
           text = "",
