@@ -1,5 +1,6 @@
 scala-js-react
 ============
+[![Build Status](https://travis-ci.org/xored/scala-js-react.svg?branch=master)](https://travis-ci.org/xored/scala-js-react)
 
 Scala-js-react provides nice statically typed interface to [Facebook's React](http://facebook.github.io/react/).
 
