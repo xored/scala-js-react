@@ -8,7 +8,7 @@ object ScalaJSReact extends Build {
 
   val SCALA_VERSION = "2.11.5"
 
-  val uTestVersion = "0.2.5-RC1"
+  val uTestVersion = "0.3.0"
   val scalajsDomVersion = "0.7.0"
   val scalaXml = "org.scala-lang.modules" %% "scala-xml" % "1.0.2"
   val scalaReflect = "org.scala-lang" % "scala-reflect" % SCALA_VERSION
