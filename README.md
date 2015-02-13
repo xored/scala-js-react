@@ -7,11 +7,13 @@ Scala-js-react provides nice statically typed interface to [Facebook's React](ht
 
 # Quickstart
 
+For detailed sbt configuration please refer to [scala.js documentation](http://www.scala-js.org/doc/).
+
 `build.sbt`
 ```scala
-scalaVersion := "2.11.5"
+enablePlugins(ScalaJSPlugin)
 
-resolvers += Resolver.sonatypeRepo("releases")
+scalaVersion := "2.11.5"
 
 libraryDependencies ++= Seq(
   "com.xored.scalajs" %%% "scalajs-react" % "0.3.3",
@@ -22,6 +24,11 @@ libraryDependencies ++= Seq(
 `project/plugins.sbt`
 ```scala
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % "0.6.0")
+```
+
+`project/build.properties`
+```
+sbt.version=0.13.7
 ```
 
 # Features
